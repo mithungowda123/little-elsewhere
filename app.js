@@ -1,3 +1,4 @@
+import {createChristmasMusic} from './music.js';
 import {heroArt,cardArt,doorArt} from './art.js';
 import {questions,getChapter,doors,storyEnding,newMemoryState,flipCard,settleCards,escapeHTML as esc} from './core.mjs';
 const $=(s)=>document.querySelector(s);
@@ -26,7 +27,7 @@ async function playChime(kind='match'){
   });
  }catch{ /* Audio availability never interrupts an experience. */ }
 }
-function updateSoundButton(){soundButton.setAttribute('aria-pressed',String(soundEnabled));soundButton.setAttribute('aria-label',soundEnabled?'Turn gentle chimes off':'Turn gentle chimes on');$('#sound-label').textContent=soundEnabled?'Sound on':'Sound off';}
+function updateSoundButton(){soundButton.setAttribute('aria-pressed',String(soundEnabled));soundButton.setAttribute('aria-label',soundEnabled?'Turn gentle chimes off':'Turn gentle chimes on');$('#sound-label').textContent=soundEnabled?'Chimes on':'Chimes off';}
 soundButton.addEventListener('click',async()=>{
  soundEpoch++;
  if(soundEnabled){soundEnabled=false;updateSoundButton();if(audioContext){const previous=audioContext;audioContext=null;try{await previous.close();}catch{}}toast('Chimes off. Enjoy a quiet little moment.');return;}
@@ -42,6 +43,18 @@ soundButton.addEventListener('click',async()=>{
  }catch{if(epoch===soundEpoch){soundEnabled=false;updateSoundButton();if(audioContext){const previous=audioContext;audioContext=null;try{await previous.close();}catch{}}toast('Chimes couldn’t start. You can keep exploring in quiet.');}}
 });
 document.addEventListener('visibilitychange',()=>{if(audioContext&&document.hidden&&audioContext.state==='running')audioContext.suspend().catch(()=>{});});
+
+
+// Background music has its own controls and context, independent of game chimes.
+const musicButton=$('#music-toggle');
+const music=createChristmasMusic({
+ onStateChange(playing){$('#music-label').textContent=playing?'Pause music':'Play music';$('#music-icon').textContent=playing?'Ⅱ':'▶';musicButton.setAttribute('aria-pressed',String(playing));musicButton.setAttribute('aria-label',playing?'Pause Christmas background music':'Play Christmas background music');$('#music-status').textContent=playing?'Christmas music playing softly.':'Christmas music paused.';},
+ onUnavailable(){toast('Music couldn’t start in this browser. You can keep exploring in quiet.');}
+});
+musicButton.addEventListener('click',async()=>{musicButton.disabled=true;try{if(music.playing)await music.pause();else await music.play();}finally{musicButton.disabled=false;}});
+$('#music-volume').addEventListener('input',event=>{music.setVolume(Number(event.target.value)/100);event.target.setAttribute('aria-valuetext',`${event.target.value} percent`);});
+document.addEventListener('visibilitychange',()=>{if(document.hidden)music.pause();});
+window.addEventListener('pagehide',()=>music.pause());
 
 let quiz={step:0,name:'',answers:[]};
 let story={door:null,choices:[]};

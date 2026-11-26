@@ -32,13 +32,15 @@ Official Pages documentation: https://docs.github.com/en/pages/getting-started-w
 - **The Door You Choose:** three settings, two decisions per visit, twelve paths and six main endings. The first decision changes the middle scene and a closing detail; the final decision determines the main ending. Replay any door.
 - **Memory Meadow:** twelve shuffled cards, six pairs, move counter, mismatch delay, completion message, and restart. No timer or competitive score. The current Christmas edition uses six festive pairs and cranberry, evergreen, and gold card backs.
 
-Edit `core.mjs` to change questions, readings, story scenes, endings, or memory symbols. Edit `art.js` for the SVG illustrations and `styles.css` for the design. Interface behavior is in `app.js`; the homepage is in `index.html`.
+Edit `core.mjs` to change questions, readings, story scenes, endings, or memory symbols. Edit `art.js` for the SVG illustrations and `styles.css` for the design. The original instrumental is in `music.js`. Interface behavior is in `app.js`; the homepage is in `index.html`.
 
 Chapter outcomes are selected from written content using the visitor’s answers. There is no AI model or factual prediction of the future. The nickname personalizes the result but does not determine it.
 
 ## Optional audio
 
-The sound button starts off on every fresh visit. Visitors can enable gentle, locally generated chimes for chapter reveals, story endings, matched pairs, and game completion. There is no autoplay, continuous background track, remote audio file, or saved sound preference. Turning sound off closes the audio context immediately. Audio failure never blocks the games.
+The soundtrack bar plays **Snowlight**, an original 40-second Christmas-style instrumental in a quiet, repeating music-box arrangement, synthesized locally in `music.js`. It starts paused on every fresh visit. Play and Pause preserve the position, the volume slider starts at 20%, and playback continues while navigating between experiences. Switching to another tab pauses the music; visitors choose when to resume.
+
+Game chimes remain separate, with their own Chimes on/off button. Neither audio control starts the other. There is no autoplay, third-party recording, audio download, or saved audio preference. The music and chimes fail gracefully when browser audio is unavailable.
 
 ## Privacy and accessibility
 
