@@ -42,6 +42,10 @@ The soundtrack bar plays **Snowlight**, an original 40-second Christmas-style in
 
 Game chimes remain separate, with their own Chimes on/off button. Neither audio control starts the other. There is no autoplay, third-party recording, audio download, or saved audio preference. The music and chimes fail gracefully when browser audio is unavailable.
 
+## Gentle snowfall
+
+A decorative overlay uses twenty small CSS-animated flakes on desktop, twelve on tablets, and eight on phones. Flakes never capture clicks or keyboard focus. The footer Snowfall on/off button allows visitors to stop the effect. Snowfall is disabled by the system reduced-motion preference, and its animation pauses while the tab is hidden. There are no animation libraries or JavaScript frame loops, and the preference is kept only for the current visit.
+
 ## Privacy and accessibility
 
 Nicknames and answers live only in page memory and are cleared on refresh. There is no local storage, cookies, analytics, third-party font request, or application backend. A visitor can explicitly download or share a result; its nickname is included only in the downloaded card, not the share text. A host may keep ordinary request logs. Keep the on-page privacy explanation aligned if integrations are added later.

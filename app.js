@@ -6,6 +6,17 @@ $('#hero-art').innerHTML=heroArt();
 document.querySelectorAll('[data-art]').forEach(el=>el.innerHTML=cardArt(el.dataset.art));
 const content=$('#experience-content');
 
+// Decorative snowfall is paused when hidden and follows the visitor's motion preference.
+const snowLayer=$('#snowfall'),snowButton=$('#snow-toggle');
+const reducedSnowMotion=window.matchMedia('(prefers-reduced-motion: reduce)');
+let snowChosen=true;
+function updateSnow(){const enabled=snowChosen&&!reducedSnowMotion.matches;snowLayer.dataset.paused=String(!enabled||document.hidden);snowButton.disabled=reducedSnowMotion.matches;snowButton.setAttribute('aria-pressed',String(enabled));snowButton.textContent=reducedSnowMotion.matches?'Snowfall off (reduced motion)':enabled?'Snowfall on':'Snowfall off';snowButton.setAttribute('aria-label',reducedSnowMotion.matches?'Snowfall is off to respect your reduced motion preference':enabled?'Turn snowfall off':'Turn snowfall on');}
+snowButton.addEventListener('click',()=>{snowChosen=!snowChosen;updateSnow();});
+reducedSnowMotion.addEventListener('change',updateSnow);
+document.addEventListener('visibilitychange',updateSnow);
+updateSnow();
+
+
 // Every note is generated locally. Sound starts off and only follows a visitor's choice.
 let soundEnabled=false,audioContext=null,soundEpoch=0;
 const soundButton=$('#sound-toggle');
