@@ -30,11 +30,15 @@ Official Pages documentation: https://docs.github.com/en/pages/getting-started-w
 
 - **Your Next Chapter:** optional nickname and four questions; four possible chapters with a mission and reflection; Back navigation; downloadable SVG keepsake; native sharing or clipboard fallback where supported.
 - **The Door You Choose:** three settings, two decisions per visit, twelve paths and six main endings. The first decision changes the middle scene and a closing detail; the final decision determines the main ending. Replay any door.
-- **Memory Meadow:** twelve shuffled cards, six pairs, move counter, mismatch delay, completion message, and restart. No timer or competitive score.
+- **Memory Meadow:** twelve shuffled cards, six pairs, move counter, mismatch delay, completion message, and restart. No timer or competitive score. The current Christmas edition uses six festive pairs and cranberry, evergreen, and gold card backs.
 
 Edit `core.mjs` to change questions, readings, story scenes, endings, or memory symbols. Edit `art.js` for the SVG illustrations and `styles.css` for the design. Interface behavior is in `app.js`; the homepage is in `index.html`.
 
 Chapter outcomes are selected from written content using the visitor’s answers. There is no AI model or factual prediction of the future. The nickname personalizes the result but does not determine it.
+
+## Optional audio
+
+The sound button starts off on every fresh visit. Visitors can enable gentle, locally generated chimes for chapter reveals, story endings, matched pairs, and game completion. There is no autoplay, continuous background track, remote audio file, or saved sound preference. Turning sound off closes the audio context immediately. Audio failure never blocks the games.
 
 ## Privacy and accessibility
 
